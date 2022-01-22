@@ -27,10 +27,11 @@
         <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=<Your Key Here>"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@{{version}}/dist/extension/bmap.min.js"></script>
         -->
-
+        <script src="theme/vintage.js"></script>
         <script type="text/javascript">
+
 var dom = document.getElementById("container");
-var myChart = echarts.init(dom);
+var myChart = echarts.init(dom, 'vintage');
 var app = {};
 
 var option;
@@ -38,6 +39,7 @@ var option;
 
 
 option = {
+  darkMode: true,
   xAxis: {
     type: 'category',
     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']

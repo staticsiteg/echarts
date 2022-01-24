@@ -42,37 +42,51 @@
         <script src="theme/macarons.js"></script>
         <script src="theme/roma.js"></script>
         <script src="theme/shine.js"></script>
-        <script type="text/javascript">
+<script type="text/javascript">
+  var theme_list = ["vintage", "infographic", "macarons", "roma", "shine", "dark"];
 
-var dom = document.getElementById("container");
-var myChart = echarts.init(dom, 'dark');
-var app = {};
+  var url = document.location;
+  var params = new URLSearchParams(url.search);
+  var title = params.get("title");
+  var data = JSON.parse(params.get("data"));
+  var x = JSON.parse(params.get("x"));
+  var type = params.get("type") || 'bar';
+  
+  var dom = document.getElementById("container");
+  if (params.has("theme") && theme_list.indexOf(params.get("theme")) != -1 ) {
+    var myChart = echarts.init(dom, params.get("theme"));
+  } else {
+    var myChart = echarts.init(dom);
+  }
 
-var option;
+  var app = {};
 
+  var option;
 
+  option = {
+    title: {
+      text: title
+    },
+    xAxis: {
+      type: 'category',
+      data: x
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: data,
+        type: type
+      }
+    ]
+  };
 
-option = {
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
-    }
-  ]
-};
+  if (option && typeof option === 'object') {
+      myChart.setOption(option);
+  }
 
-if (option && typeof option === 'object') {
-    myChart.setOption(option);
-}
-
-        </script>
+</script>
     </body>
 </html>
     

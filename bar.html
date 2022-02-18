@@ -64,30 +64,41 @@
   var option;
 
   option = {
-    title: {
-      text: title
-    },
-    tooltip: {
+  tooltip: {
     trigger: 'axis',
     axisPointer: {
       type: 'shadow'
     }
   },
-  axisLabel: { interval: 0, rotate: 30 },
-    xAxis: {
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
       type: 'category',
-      data: x
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: data,
-        type: type
+      data: x,
+      axisTick: {
+        alignWithLabel: true
       }
-    ]
-  };
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'Direct',
+      type: 'bar',
+      barWidth: '60%',
+      data: data
+    }
+  ]
+};
 
   if (option && typeof option === 'object') {
       myChart.setOption(option);
